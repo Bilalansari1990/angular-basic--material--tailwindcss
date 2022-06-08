@@ -1,0 +1,69 @@
+<form [formGroup]="userForm">
+  <mat-form-field appearance="outline">
+    <mat-label>FirstName</mat-label>
+    <input
+      type="text"
+      name="firstName"
+      matInput
+      formControlName="firstName"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. John Doe"
+    />
+
+    <mat-error *ngIf="userForm.controls.firstName.errors?.required">
+      firstName is <strong>required</strong>.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. john@example.com"
+    />
+    <mat-error *ngIf="userForm.controls.email.errors?.required">
+      Email is <strong>required</strong>.
+    </mat-error>
+    <mat-error *ngIf="userForm.controls.email.errors?.email">
+      <strong>Invalid</strong> email address.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Contact</mat-label>
+    <input
+      type="number"
+      name="mobileNumber"
+      matInput
+      formControlName="mobileNumber"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. +924444444444"
+    />
+
+    <mat-error *ngIf="userForm.controls.mobileNumber.errors?.required">
+      Contact is <strong>required</strong>.
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    class="w-32"
+    [color]="getButtonStatus()"
+    (click)="onSubmit()"
+  >
+    Save
+  </button>
+</form>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>User Data</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <h2>{{ userData?.firstName }}</h2>
+    <h2>{{ userData?.email }}</h2>
+    <h2>{{ userData?.mobileNumber }}</h2>
+  </mat-card-content>
+</mat-card>
